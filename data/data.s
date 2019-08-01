@@ -1,3 +1,4 @@
+#include "constants/items.h"
 #include "constants/region_map.h"
 #include "constants/trainer_classes.h"
 #include "constants/songs.h"
@@ -320,8 +321,23 @@ gUnknown_825081C:: @ 825081C
 gUnknown_8250830:: @ 8250830
 	.incbin "baserom.gba", 0x250830, 0x18
 
-gUnknown_8250848:: @ 8250848
-	.incbin "baserom.gba", 0x250848, 0x40
+gPickupItems:: @ 8250848
+	.2byte ITEM_ORAN_BERRY, 15
+	.2byte ITEM_CHERI_BERRY, 25
+	.2byte ITEM_CHESTO_BERRY, 35
+	.2byte ITEM_PECHA_BERRY, 45
+	.2byte ITEM_RAWST_BERRY, 55
+	.2byte ITEM_ASPEAR_BERRY, 65
+	.2byte ITEM_PERSIM_BERRY, 75
+	.2byte ITEM_TM10_HIDDEN_POWER, 80
+	.2byte ITEM_PP_UP, 85
+	.2byte ITEM_RARE_CANDY, 90
+	.2byte ITEM_NUGGET, 95
+	.2byte ITEM_SPELON_BERRY, 96
+	.2byte ITEM_PAMTRE_BERRY, 97
+	.2byte ITEM_WATMEL_BERRY, 98
+	.2byte ITEM_DURIN_BERRY, 99
+	.2byte ITEM_BELUE_BERRY, 1
 
 gUnknown_8250888:: @ 8250888
 	.incbin "baserom.gba", 0x250888, 0xA

@@ -31058,10 +31058,10 @@ _0802CEA2:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r2, 0
-	ldr r1, _0802CEE4 @ =gUnknown_8250848
+	ldr r1, _0802CEE4 @ =gPickupItems
 	b _0802CEF0
 	.align 2, 0
-_0802CEE4: .4byte gUnknown_8250848
+_0802CEE4: .4byte gPickupItems
 _0802CEE8:
 	adds r1, 0x4
 	adds r2, 0x1
@@ -31077,7 +31077,7 @@ _0802CEF6:
 	ldr r1, _0802CF24 @ =gPlayerParty
 	adds r0, r1
 	lsls r2, 2
-	ldr r1, _0802CF28 @ =gUnknown_8250848
+	ldr r1, _0802CF28 @ =gPickupItems
 	adds r2, r1
 	movs r1, 0xC
 	bl SetMonData
@@ -31096,7 +31096,7 @@ _0802CF0A:
 	bx r0
 	.align 2, 0
 _0802CF24: .4byte gPlayerParty
-_0802CF28: .4byte gUnknown_8250848
+_0802CF28: .4byte gPickupItems
 _0802CF2C: .4byte gUnknown_2023D74
 	thumb_func_end sub_802CE48
 

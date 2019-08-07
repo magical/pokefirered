@@ -411,8 +411,9 @@ sub_80829FC: @ 80829FC
 	lsls r2, 24
 	lsrs r5, r2, 24
 	bl ZeroEnemyPartyMons
-	cmp r4, 0xC9
-	beq _08082A3C
+	cmp r4, 0xC9 // SPECIES_UNOWN
+	beq chooseUnownForm
+	// select a random nature
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -430,30 +431,32 @@ sub_80829FC: @ 80829FC
 	b _08082A74
 	.align 2, 0
 _08082A38: .4byte gEnemyParty
-_08082A3C:
+chooseUnownForm:
 	ldr r0, _08082A7C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
-	ldrb r1, [r0, 0x5]
+	ldrb r1, [r0, 0x5] // saveBlock1Ptr->location.mapNum
 	subs r1, 0x1B
-	ldr r2, _08082A80 @ =gUnknown_83CA71C
+	ldr r2, _08082A80 @ =gWildUnownForms
+	// r0 = r1 * 12
 	lsls r1, 24
 	asrs r1, 24
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 2
+	// r0 = gWildUnownForms[(mapNum-0x1B)*12 + slot]
 	adds r0, r5, r0
 	adds r0, r2
 	ldrb r0, [r0]
-	bl sub_8082A88
+	bl GetRandomPersonalityForUnownForm
 	ldr r2, _08082A84 @ =gEnemyParty
 	movs r1, 0x1
-	str r1, [sp]
-	str r0, [sp, 0x4]
+	str r1, [sp]            // hasFixedPersonality
+	str r0, [sp, 0x4]       // fixedPersonality
 	movs r0, 0
 	str r0, [sp, 0x8]
 	str r0, [sp, 0xC]
 	adds r0, r2, 0
-	movs r1, 0xC9
+	movs r1, 0xC9 // SPECIES_UNOWN
 	adds r2, r6, 0
 	movs r3, 0x20
 	bl CreateMon
@@ -464,12 +467,12 @@ _08082A74:
 	bx r0
 	.align 2, 0
 _08082A7C: .4byte gSaveBlock1Ptr
-_08082A80: .4byte gUnknown_83CA71C
+_08082A80: .4byte gWildUnownForms
 _08082A84: .4byte gEnemyParty
 	thumb_func_end sub_80829FC
 
-	thumb_func_start sub_8082A88
-sub_8082A88: @ 8082A88
+	thumb_func_start GetRandomPersonalityForUnownForm
+GetRandomPersonalityForUnownForm: @ 8082A88
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -491,7 +494,7 @@ _08082A8E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8082A88
+	thumb_func_end GetRandomPersonalityForUnownForm
 
 	thumb_func_start GetUnownLetterByPersonalityLoByte
 GetUnownLetterByPersonalityLoByte: @ 8082AB8
